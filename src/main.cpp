@@ -40,25 +40,28 @@ void setServoTarget(int servoNum, int targetPos)
 }
 
 
-// Function to smoothly move a servo
+// Updated function to smoothly move servos
 void moveServoSmooth()
 {
-  for (int i =0; i < numServos; i++) 
+  for (int i =0; i < numServos; i++) // Check each servo at each iteration 
   {
-    if (currentServoPos[i] != targetServoPos[i])
+    // Compare curent servo position to target and skip if servo already at target
+    if (currentServoPos[i] != targetServoPos[i]) 
     {
       int diff = targetServoPos[i] - currentServoPos[i];
+
+      // Check if the difference is small enough to set directly
       if (abs(diff) <= 1) 
       {
         currentServoPos[i] = targetServoPos[i];
       } 
       else 
       {
-        currentServoPos[i] += (diff > 0) ? 1 : -1;
+        currentServoPos[i] += (diff > 0) ? 1 : -1; // If difference is larger then move one step to the target position
       }
 
-      int pulse = map(currentServoPos[i], 0, 180, servoMin, servoMax);
-      pwm.setPWM(servoPins[i], 0, pulse);
+      int pulse = map(currentServoPos[i], 0, 180, servoMin, servoMax); // Set pulse width based on current position
+      pwm.setPWM(servoPins[i], 0, pulse); // Update each servo position
     }
   }
 }
