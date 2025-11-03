@@ -48,7 +48,7 @@ class RobotArmGUI(QMainWindow):
         main_layout.addWidget(right_panel, stretch=2)  # Make right panel take more space
 
 
-        self.ser = None # serial.Serial('COM3', baudrate =115200 , timeout=1 )
+        self.ser = serial.Serial('COM3', baudrate =115200 , timeout=1 )
         self.last_command_time = 0
         self.command_interval = 100  # milliseconds
 
@@ -70,10 +70,10 @@ class RobotArmGUI(QMainWindow):
 
         servos = [
             ("Base Rotation", 0, 180, 90),
-            ("Swing", 0, 180, 90),
-            ("Arm 1", 0, 180, 90),
-            ("Arm 2", 0, 180, 90),
-            ("Gripper", 0, 180, 90),
+            ("Swing", 10, 90, 90),
+            ("Arm 1", 80, 140, 90),
+            ("Arm 2", 80, 130, 90),
+            ("Gripper", 50, 150, 90),
         ]
 
         self.sliders = []
